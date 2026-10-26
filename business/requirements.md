@@ -1,9 +1,4 @@
-# Software Requirements Specification (SRS) & Functional Requirements Document (FRD)
-**Document Reference:** `FRD-EDUTECH-MOCKTEST-2026-V1`  
-**Project Name:** Institute Online Mock Test Platform  
-**Target Audience:** Technical Leads, Full-Stack Developers, QA Engineers, Product Managers  
-**Status:** Approved for Implementation (POC / Sprint 1 Target)  
----
+
 ## 1. Document Control & Executive Summary
 ### 1.1 Business Context & Purpose
 Educational institutes need to assess student readiness through timed, standardized mock exams. Manual paper-based tests or unstructured Google Forms fail to deliver:
