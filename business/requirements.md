@@ -156,10 +156,14 @@ For a selected test, the dashboard aggregates across all submissions:
 5. **Score Distribution Chart:** Histogram of score brackets (e.g., `< 40%`, `40–70%`, `> 70%`).
 ##### View C: Question-Level Item Analysis (Diagnostic Matrix)
 A table listing every question in the test with performance metrics:
+
 | Q# | Question Snippet | % Correct | % Incorrect | % Skipped | Difficulty Assessment |
 | :---: | :--- | :---: | :---: | :---: | :---: |
-| Q1 | What is Newton's Second Law? | 85% | 10% | 5% | Low (Well Understood) |
-| Q2 | Calculate the enthalpy change... | 22% | 68% | 10% | High (Needs Revision in Class) |
+| Q1 | What is the default scope of a Spring Bean in Spring Boot? | 86% | 9% | 5% | Low (Core Concept Mastered) |
+| Q2 | In SQL, which clause filters rows *before* aggregation: WHERE or HAVING? | 62% | 31% | 7% | Medium (Standard Query Logic) |
+| Q3 | In Java, which exception causes `@Transactional` to rollback by default? | 26% | 64% | 10% | High (Needs Revision in Class) |
+| Q4 | What is the internal data structure used by `ConcurrentHashMap` in Java 8+? | 31% | 55% | 14% | High (Deep-Dive Concept) |
+
 ##### View D: Student-Wise Attempts Breakdown
 * Expandable row per student showing:
   * Number of attempts made (e.g., `2 / 2`).
