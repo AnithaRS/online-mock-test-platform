@@ -24,7 +24,36 @@ The system enforces strict Role-Based Access Control (RBAC). A user cannot switc
 | View Individual Student Attempt Breakdown | Allowed | Denied | Denied |
 ---
 ## 3. High-Level System Workflow
-[Teacher] │ ├─► 1. Adds Questions to Question Bank (Manual or Bulk CSV) │ └─► 2. Creates Mock Test ──► Picks Questions ──► Sets Timer & Attempt Limit ──► Publishes Test │ [Student] │ │ ▼ ├─► 3. Views Available Tests ◄──────────────────────────────────────────────────────┘ │ ├─► 4. Starts Attempt (Enforces Countdown Timer) │ ├─► Saves answers continuously (draft auto-save) │ └─► Submits (Manual click OR Auto-submit on timer expiry) │ └─► 5. Views Instant Results & Question Breakdown (Correct, Incorrect, Explanations) │ [Analytics Engine] │ └─► 6. Real-time Aggregation for Teacher Dashboard ├─► Attended vs. Not Attended Student Roster ├─► Overall Correct / Incorrect / Unanswered Question Metrics └─► Individual Student Attempt Logs
+
+```mermaid
+flowchart TD
+    subgraph Teacher_Workflow [1. Teacher Setup]
+        A[Add Questions to Question Bank] --> B[Create Mock Test]
+        B --> C[Configure Timer & Allowed Attempts]
+        C --> D[Publish Test]
+    end
+
+    subgraph Student_Workflow [2. Student Test Experience]
+        D --> E[View Available Tests in Lobby]
+        E --> F[Start Timed Attempt]
+        F --> G[Select Answers - Auto-Saved]
+        G --> H[Submit Manually OR Auto-Submit on Timeout]
+        H --> I[View Instant Score & Explanations]
+    end
+
+    subgraph Analytics_Workflow [3. Analytics & Reporting]
+        H --> J[Analytics Engine Processes Submission]
+        J --> K[Attendance Roster: Attended vs Not Attended]
+        J --> L[Performance: Correct / Incorrect / Unanswered]
+    end
+```
+
+### End-to-End Flow Summary
+1. **Preparation:** Teacher adds MCQs to the Question Bank, selects questions, sets duration and attempt limits, and publishes the test.
+2. **Execution:** Student enters the test, takes the exam against a live server countdown timer with continuous auto-saving.
+3. **Completion:** Test submits on student confirmation or automatically when the timer reaches `00:00:00`.
+4. **Immediate Feedback:** Student immediately
+
 
 ---
 ## 4. Detailed Functional Requirements (Module by Module)
@@ -168,7 +197,7 @@ Developers should design the database schema around the following core relationa
 ### 7.3 Usability & Device Support
 * Fully responsive layout optimized for Desktop/Laptop screens (1366x768 and above) and Tablets (e.g., iPads / Chromebooks commonly used in schools).
 ---
-## 8. QA Acceptance Criteria (Gherkin Syntax)
+## 8. QA Acceptance Criteria
 ### Scenario 1: Teacher Successfully Creates a Timed Test
 
 Given a Teacher is logged into the platform
@@ -180,13 +209,13 @@ And clicks "Publish Test"
 Then the test status changes to "PUBLISHED"
 And the test immediately appears on the Student dashboard.
 
-###Scenario 2: Student Exceeds Allowed Attempts
+### Scenario 2: Student Exceeds Allowed Attempts
 Given a Student has already completed 2 attempts on a test where Max Attempts is "2"
 When the Student visits the Test Lobby screen
 Then the "Start Test" button is disabled
 And an informative alert states: "You have used all 2 allowed attempts."
 
-###Scenario 3: Auto-Submit on Timer Expiration
+### Scenario 3: Auto-Submit on Timer Expiration
 
 Given a Student is actively taking a mock test
 And the countdown timer reaches "00:00:00"
@@ -195,7 +224,7 @@ Then the test interface automatically locks to prevent further selections
 And the attempt is automatically submitted to the server
 And the Student is redirected to the Score Summary screen.
 
-###Scenario 4: Teacher Dashboard Correctly Reflects "Not Attended"
+### Scenario 4: Teacher Dashboard Correctly Reflects "Not Attended"
 Given a class has 30 enrolled students
 And a published test has been submitted by 18 students
 When the Teacher opens the Test Analytics Dashboard
