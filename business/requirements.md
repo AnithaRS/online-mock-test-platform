@@ -171,6 +171,7 @@ A table listing every question in the test with performance metrics:
   * Link to inspect the student's exact submission sheet.
 ---
 ## 5. Conceptual Data Domain Model
+
 Developers should design the database schema around the following core relational entities:
 | Entity Name | Primary Fields | Relationships |
 | :--- | :--- | :--- |
